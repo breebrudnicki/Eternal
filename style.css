@@ -266,7 +266,7 @@ input,
 select,
 textarea {
 	color: #404040;
-	font-family: sans-serif;
+	font-family: 'Raleway', sans-serif;
 	font-size: 16px;
 	font-size: 1rem;
 	line-height: 1.5;
@@ -279,6 +279,7 @@ h4,
 h5,
 h6 {
 	clear: both;
+	font-family: 'Great Vibes', cursive;
 }
 
 p {
@@ -336,7 +337,18 @@ ins {
 big {
 	font-size: 125%;
 }
-
+.entry-title {
+	font-size: 2em;
+	color: #985051;
+}
+.entry-title a,
+.entry-title a:visited {
+	text-decoration: none;
+	color: #985051;
+}
+.entry-title a:hover {
+	text-decoration: underline;
+}
 /*--------------------------------------------------------------
 # Elements
 --------------------------------------------------------------*/
@@ -637,6 +649,9 @@ nav ul li a:hover {
 	.main-navigation li {
 		text-align: center;
 	}
+	.main-navigation:not(.toggled) div.menu-main-container {
+		display: none;
+	}
 }
 @media screen and (min-width: 37.5em) {
 	.menu-toggle {
@@ -805,6 +820,34 @@ nav ul li a:hover {
 	margin: 0 0 1.5em;
 }
 
+main.front-page,
+main.site-main {
+	width: 80%;
+	max-width: 55em;
+	margin: auto;
+}
+@media screen and (max-width: 53em) {
+	main.front-page,
+	main.site-main {
+		box-sizing: border-box;
+		width: 100%;
+		padding: 0em 1.2em;
+	}
+}
+.entry-title {
+	font-size: 5em;
+	margin: .5em 0em 0em;
+}
+@media screen and (max-width: 37.5em) {
+	.entry-title {
+		font-size: 3.5em;
+	}
+}
+@media screen and (max-width: 28em) {
+	.entry-title {
+		font-size: 2.7em;
+	}
+}
 /*--------------------------------------------------------------
 ## Comments
 --------------------------------------------------------------*/
@@ -852,6 +895,15 @@ a#site-logo img {
 	margin: auto;
 	margin-top: 2em;
 }
+.header-custom img {
+	width: 100%;
+	display: block;
+	margin: auto;
+
+}
+header.site-header {
+	width: 100%;
+}
 @media screen and (max-width: 43em) {
 	a#site-logo img {
 		width: 70%;
@@ -860,6 +912,22 @@ a#site-logo img {
 /*--------------------------------------------------------------
 ## Footer
 --------------------------------------------------------------*/
+footer.site-footer {
+	background-color: #985051;
+	padding: 1em;
+}
+footer.site-footer h1,
+footer.site-footer p {
+	box-sizing: border-box;
+	text-align: center;
+	margin: 0;
+}
+footer.site-footer h1 a,
+footer.site-footer h1 a:visited,
+footer.site-footer p {
+	color: white;
+	text-decoration: none;
+}
 /*--------------------------------------------------------------
 # Infinite scroll
 --------------------------------------------------------------*/
@@ -963,4 +1031,8 @@ object {
 
 .gallery-caption {
 	display: block;
+}
+div.tiled-gallery div.gallery-row {
+	margin: auto;
+	width: 100%;
 }
