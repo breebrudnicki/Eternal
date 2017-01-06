@@ -14,41 +14,7 @@ function eternal_customize_register( $wp_customize ) {
 	$wp_customize->get_setting( 'blogname' )->transport         = 'postMessage';
 	$wp_customize->get_setting( 'blogdescription' )->transport  = 'postMessage';
 	$wp_customize->get_setting( 'header_textcolor' )->transport = 'postMessage';
-	//Adding a Setting
-	$wp_customize->add_setting( 'header_textcolor' , array(
-		'default'     => '#000000',
-		'transport'   => 'refresh',
-	) );
-	//Adding a New Section
-	$wp_customize->add_section( 'mytheme_new_section_name' , array(
-    'title'      => __( 'Visible Section Name', 'mytheme' ),
-    'priority'   => 30,
-	) );
-	//Adding a new control
-	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'link_color', array(
-	'label'        => __( 'Header Color', 'mytheme' ),
-	'section'    => 'mytheme_new_section_name',
-	'settings'   => 'header_textcolor',
-	) ) );
-	//COLOR EXAMPLE
-	//Creating a setting
-	$wp_customize->add_setting('eternal_link_color', array(
-		'default' => '#fff',
-		'transport' => 'refresh',
-	));
-	//Creating a section
-	$wp_customize->add_section('eternal_standard_colors', array(
-		'title' => __('Standard Colors', 'Eternal'),
-		'priority' => 30,
-	));
-	//Creating a control
-	$wp_customize->add_control( new WP_Customize_Color_Control($wp_customize, 'eternal_link_color_control', array(
-		'label' => __('Link Color', 'Eternal'),
-		'section' => 'eternal_standard_colors',
-		'settings' => 'eternal_link_color',
-	)));
-
-	//MY OWN THING
+	//Choose Logo
 	$wp_customize->add_setting('eternal_custom-logo', array(
 		'default' => '',
 		'transport' => 'refresh',
@@ -63,6 +29,37 @@ function eternal_customize_register( $wp_customize ) {
 		'label' => __('Logo', 'Eternal'),
 		'section' => 'eternal_logo',
 		'settings' => 'eternal_custom-logo',
+	)));
+	//Wedding Date
+	$today = date("Y-m-d H:i:s");
+	$oneyear = date('Y-m-d', strtotime('+1 years'));
+	//date picker function - borrowed from together theme
+	class Eternal_DateControl extends WP_Customize_Control {
+	function render_content() {
+		?>
+		<label>
+			<span><?php echo esc_html($this->label); ?></span>
+			<input type="date" <?php $this->link(); ?> value="<?php echo esc_attr($this->value()); ?>">
+		</label>
+		<?php
+	}
+}
+	$wp_customize->add_setting('eternal-wedding-date', array(
+		'default' => $oneyear,
+		'sanitize_callback' => 'sanitize_text_field',
+		'transport' => 'refresh',
+	));
+	//Creating a section
+	$wp_customize->add_section('eternal_date', array(
+		'title' => __('Countdown Date Picker', 'Eternal'),
+		'priority' => 30,
+	));
+	//Creating a control
+	$wp_customize->add_control( new Eternal_DateControl($wp_customize, 'eternal-date-control', array(
+		'label' => __('Countdown Date Picker', 'Eternal'),
+		'section' => 'eternal_date',
+		'settings' => 'eternal-wedding-date',
+		'type' => 'text'
 	)));
 }
 add_action( 'customize_register', 'eternal_customize_register' );
