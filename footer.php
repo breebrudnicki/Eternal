@@ -22,6 +22,19 @@
 				<p class="footer-site-description"><?php echo $description; /* WPCS: xss ok. */ ?></p>
 			<?php
 			endif; ?>
+			<?php if ( get_theme_mod( 'eternal-wedding-date' ) ) :
+				// $date = get_theme_mod( 'eternal-wedding-date' );
+				//
+				// function formatDate($date) {
+				//     $d = DateTime::createFromFormat('Y-m-d', $date);
+				//     return $d && $d->format('d-m-y') === $date;
+				// }
+				// $formatteddate = formatDate($date);
+				$originalDate = get_theme_mod( 'eternal-wedding-date' );
+				$newDate = date("d.m.y", strtotime($originalDate));
+				?>
+			    <p class="wedding-date"><?php echo $newDate; ?></p>
+			<?php endif; ?>
 		</div><!-- .site-info -->
 	</footer><!-- #colophon -->
 </div><!-- #page -->
