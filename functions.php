@@ -75,7 +75,11 @@ function eternal_fonts() {
   wp_enqueue_style('bree-carrick-google-fonts', 'https://fonts.googleapis.com/css?family=Great+Vibes|Raleway');
 }
 add_action( 'wp_enqueue_scripts', 'eternal_fonts' );
-
+//enqueues our external font awesome stylesheet
+function eternal_font_awesome(){
+	wp_enqueue_style('font-awesome', '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css');
+}
+add_action('wp_enqueue_scripts','eternal_font_awesome');
 /**
  * Set the content width in pixels, based on the theme's design and stylesheet.
  *

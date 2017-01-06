@@ -620,13 +620,31 @@ nav ul li a:hover {
 .main-navigation.toggled ul {
 	display: block;
 }
-
+.menu-toggle:after {
+	font-family: 'FontAwesome';
+	content: '  \f0c9';
+}
+.menu-toggle {
+	background-color: inherit;
+	border: none;
+	font-size: 1.2em;
+	text-align: left;
+}
+@media screen and (max-width: 37.5em) {
+	nav#site-navigation {
+		flex-direction: column;
+	}
+	.main-navigation.toggled ul {
+		display: flex;
+    flex-direction: column;
+	}
+	.main-navigation li {
+		text-align: center;
+	}
+}
 @media screen and (min-width: 37.5em) {
 	.menu-toggle {
 		display: none;
-	}
-	.main-navigation ul {
-		display: block;
 	}
 }
 
@@ -809,6 +827,7 @@ nav ul li a:hover {
 	text-align: center;
 }
 .site-branding h1 {
+	box-sizing: border-box;
 	font-family: "Great Vibes";
 	line-height: 1.5;
 	margin: 1.3em 0em 0em 0em;
@@ -823,8 +842,24 @@ nav ul li a:hover {
 	text-decoration: none;
 	font-size: 2em;
 }
+.current-menu-item {
+	background: url(watercolor-background-light.svg);
+	background-repeat: no-repeat;
+	background-position: center;
+}
 nav {
 	margin-top: 1.4em;
+}
+a#site-logo img {
+	max-width: 30em;
+	display: block;
+	margin: auto;
+	margin-top: 2em;
+}
+@media screen and (max-width: 43em) {
+	a#site-logo img {
+		width: 70%;
+	}
 }
 /*--------------------------------------------------------------
 ## Footer
