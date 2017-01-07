@@ -830,6 +830,7 @@ article.page {
 }
 @media screen and (max-width: 53em) {
 	section.countdown,
+	section.registry,
 	article.page {
 		box-sizing: border-box;
 		width: 100%;
@@ -875,6 +876,22 @@ article .custom-header.in-panel {
 }
 .entry-title.front-page {
 	text-align: center;
+}
+.registry-wrapper {
+	display: flex;
+  justify-content: center;
+}
+.registry-container {
+	box-sizing: border-box;
+	width: 25%;
+	padding: 1em;
+}
+.registry-container p {
+	text-align: center;
+	font-size: .95em;
+}
+.registry-text-container {
+	background: #f3d1c7;
 }
 /*--------------------------------------------------------------
 ## Comments
@@ -972,7 +989,6 @@ footer.site-footer p {
 }
 
 #clockdiv{
-	color: #fff;
 	display: inline-block;
 	font-weight: 100;
 	text-align: center;
@@ -982,7 +998,6 @@ footer.site-footer p {
 #clockdiv > div{
 	padding: 10px;
 	border-radius: 10%;
-	background: #985051;
 	display: inline-block;
 }
 

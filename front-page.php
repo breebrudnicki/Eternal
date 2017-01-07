@@ -66,6 +66,44 @@ get_header(); ?>
 		?>
 
 		<?php
+		//Registry
+		if ( get_theme_mod( 'eternal-registry-title' ) ) : ?>
+		<div class="section-wrapper registry-section-wrapper">
+		 <section class="registry full-width">
+			 	<h2 class="entry-title front-page"><?php echo get_theme_mod( 'eternal-registry-title' ); ?></h2>
+				<div class="registry-wrapper">
+			 	<?php if ( get_theme_mod( 'eternal-registry-blurb' ) ) : ?>
+					<div class="registry-container registry-text-container">
+						<p><?php echo get_theme_mod( 'eternal-registry-blurb' ); ?></p>
+					</div>
+				<?php endif; ?>
+				<?php if ( get_theme_mod( 'eternal_custom-registry2' ) && get_theme_mod( 'eternal-registry-link-2' ) ) : ?>
+					<div class="registry-container">
+						<a href="<?php echo get_theme_mod( 'eternal-registry-link-2' ); ?>" class="registry-image-link">
+							<img src="<?php echo get_theme_mod( 'eternal_custom-registry2' ); ?>" alt="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?> registry">
+						</a>
+					</div>
+				<?php endif; ?>
+				<?php if ( get_theme_mod( 'eternal_custom-registry3' ) && get_theme_mod( 'eternal-registry-link-3' ) ) : ?>
+					<div class="registry-container">
+						<a href="<?php echo get_theme_mod( 'eternal-registry-link-3' ); ?>" class="registry-image-link">
+							<img src="<?php echo get_theme_mod( 'eternal_custom-registry3' ); ?>" alt="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?> registry">
+						</a>
+					</div>
+				<?php endif; ?>
+				<?php if ( get_theme_mod( 'eternal_custom-registry1' ) && get_theme_mod( 'eternal-registry-link-1' ) ) : ?>
+					<div class="registry-container">
+						<a href="<?php echo get_theme_mod( 'eternal-registry-link-1' ); ?>" class="registry-image-link">
+							<img src="<?php echo get_theme_mod( 'eternal_custom-registry1' ); ?>" alt="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?> registry">
+						</a>
+					</div>
+				<?php endif; ?>
+			</div>
+		 </section>
+	 </div>
+		<?php endif; ?>
+
+		<?php
 
 		// Get each of our panels and show the post data
 		$panels = array( '1', '2', '3', '4', '5' );

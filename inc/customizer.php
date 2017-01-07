@@ -84,46 +84,179 @@ function eternal_customize_register( $wp_customize ) {
 
 		// Panel 1
 		$wp_customize->add_section( 'eternal_panel1', array(
-			'title'           => esc_html__( 'Panel 1', 'eternal' ),
+			'title'           => esc_html__( 'Registry Details', 'eternal' ),
 			'active_callback' => 'is_front_page',
 			'panel'           => 'eternal_theme_options',
-			'description'     => esc_html__( 'Add a background image to your panel by setting a featured image in the page editor. If you don&rsquo;t select a page, this panel will not be displayed.', 'eternal' ),
 		) );
-
-		$wp_customize->add_setting( 'eternal_panel1', array(
-			'default'           => false,
-			'sanitize_callback' => 'eternal_sanitize_numeric_value',
-		) );
-
-		$wp_customize->add_control( 'eternal_panel1', array(
-			'label'   => esc_html__( 'Panel Content', 'eternal' ),
+		//Registry Title
+		$wp_customize->add_setting('eternal-registry-title', array(
+			'default' => "",
+			'sanitize_callback' => 'sanitize_text_field',
+			'transport' => 'refresh',
+		));
+		$wp_customize->add_control( new WP_Customize_Control($wp_customize, 'eternal-registry-title-control', array(
+			'label' => __('Registry Title', 'Eternal'),
 			'section' => 'eternal_panel1',
-			'type'    => 'dropdown-pages',
-		) );
-
+			'settings' => 'eternal-registry-title',
+			'type' => 'text'
+		)));
+		//Registry Blurb
+		$wp_customize->add_setting('eternal-registry-blurb', array(
+			'default' => "",
+			'sanitize_callback' => 'sanitize_text_field',
+			'transport' => 'refresh',
+		));
+		$wp_customize->add_control( new WP_Customize_Control($wp_customize, 'eternal-registry-blurb-control', array(
+			'label' => __('Registry Text', 'Eternal'),
+			'section' => 'eternal_panel1',
+			'settings' => 'eternal-registry-blurb',
+			'type' => 'text'
+		)));
+		//Registry One
+		$wp_customize->add_setting('eternal-registry-link-1', array(
+			'default' => "",
+			'sanitize_callback' => 'sanitize_text_field',
+			'transport' => 'refresh',
+		));
+		$wp_customize->add_control( new WP_Customize_Control($wp_customize, 'eternal-registry-link-control-1', array(
+			'label' => __('Registry URL', 'Eternal'),
+			'section' => 'eternal_panel1',
+			'settings' => 'eternal-registry-link-1',
+			'type' => 'text'
+		)));
+		$wp_customize->add_setting('eternal_custom-registry1', array(
+			'default' => '',
+			'transport' => 'refresh',
+		));
+		$wp_customize->add_control( new WP_Customize_Image_Control($wp_customize, 'eternal-registry-control-1', array(
+			'label' => __('Registry One', 'Eternal'),
+			'section' => 'eternal_panel1',
+			'settings' => 'eternal_custom-registry1',
+		)));
+		//Registry Two
+		$wp_customize->add_setting('eternal-registry-link-2', array(
+			'default' => "",
+			'sanitize_callback' => 'sanitize_text_field',
+			'transport' => 'refresh',
+		));
+		$wp_customize->add_control( new WP_Customize_Control($wp_customize, 'eternal-registry-link-control-2', array(
+			'label' => __('Registry URL', 'Eternal'),
+			'section' => 'eternal_panel1',
+			'settings' => 'eternal-registry-link-2',
+			'type' => 'text'
+		)));
+		$wp_customize->add_setting('eternal_custom-registry2', array(
+			'default' => '',
+			'transport' => 'refresh',
+		));
+		$wp_customize->add_control( new WP_Customize_Image_Control($wp_customize, 'eternal-registry-control-2', array(
+			'label' => __('Registry Two', 'Eternal'),
+			'section' => 'eternal_panel1',
+			'settings' => 'eternal_custom-registry2',
+		)));
+		//Registry Three
+		$wp_customize->add_setting('eternal-registry-link-3', array(
+			'default' => "",
+			'sanitize_callback' => 'sanitize_text_field',
+			'transport' => 'refresh',
+		));
+		$wp_customize->add_control( new WP_Customize_Control($wp_customize, 'eternal-registry-link-control-3', array(
+			'label' => __('Registry URL', 'Eternal'),
+			'section' => 'eternal_panel1',
+			'settings' => 'eternal-registry-link-3',
+			'type' => 'text'
+		)));
+		$wp_customize->add_setting('eternal_custom-registry3', array(
+			'default' => '',
+			'transport' => 'refresh',
+		));
+		$wp_customize->add_control( new WP_Customize_Image_Control($wp_customize, 'eternal-registry-control-3', array(
+			'label' => __('Registry Three', 'Eternal'),
+			'section' => 'eternal_panel1',
+			'settings' => 'eternal_custom-registry3',
+		)));
 		// Panel 2
 		$wp_customize->add_section( 'eternal_panel2', array(
-			'title'           => esc_html__( 'Panel 2', 'eternal' ),
+			'title'           => esc_html__( 'Event Details', 'eternal' ),
 			'active_callback' => 'is_front_page',
 			'panel'           => 'eternal_theme_options',
-			'description'     => esc_html__( 'Add a background image to your panel by setting a featured image in the page editor. If you don&rsquo;t select a page, this panel will not be displayed.', 'eternal' ),
 		) );
-
+		//date-time picker function - borrowed from together theme
+		class Eternal_DateTimeControl extends WP_Customize_Control {
+			function render_content() {
+			?>
+			<label>
+				<span><?php echo esc_html($this->label); ?></span>
+				<input type="datetime-local" <?php $this->link(); ?> value="<?php echo esc_attr($this->value()); ?>">
+			</label>
+			<?php
+			}
+		}
+		//Event One
+		//place
+		$wp_customize->add_setting('venue-one', array(
+			'default' => "",
+			'sanitize_callback' => 'sanitize_text_field',
+			'transport' => 'refresh',
+		));
+		$wp_customize->add_control( new WP_Customize_Control($wp_customize, 'eternal-event-one-control', array(
+			'label' => __('Location One', 'Eternal'),
+			'section' => 'eternal_panel2',
+			'settings' => 'venue-one',
+			'type' => 'text'
+		)));
+		//date//time
+		$wp_customize->add_setting('event-date-one', array(
+			'default' => $oneyear,
+			'sanitize_callback' => 'sanitize_text_field',
+			'transport' => 'refresh',
+		));
+		//Creating a control
+		$wp_customize->add_control( new Eternal_DateTimeControl($wp_customize, 'eternal-event-one-date-control', array(
+			'label' => __('Event One Date', 'Eternal'),
+			'section' => 'eternal_panel2',
+			'settings' => 'event-date-one',
+			'type' => 'text'
+		)));
+		//Event Two
+		//place
+		$wp_customize->add_setting('venue-two', array(
+			'default' => "",
+			'sanitize_callback' => 'sanitize_text_field',
+			'transport' => 'refresh',
+		));
+		$wp_customize->add_control( new WP_Customize_Control($wp_customize, 'eternal-event-two-control', array(
+			'label' => __('Location Two', 'Eternal'),
+			'section' => 'eternal_panel2',
+			'settings' => 'venue-two',
+			'type' => 'text'
+		)));
+		//date//time
+		$wp_customize->add_setting('event-date-two', array(
+			'default' => $oneyear,
+			'sanitize_callback' => 'sanitize_text_field',
+			'transport' => 'refresh',
+		));
+		//Creating a control
+		$wp_customize->add_control( new Eternal_DateTimeControl($wp_customize, 'eternal-event-two-date-control', array(
+			'label' => __('Event Two Date', 'Eternal'),
+			'section' => 'eternal_panel2',
+			'settings' => 'event-date-two',
+			'type' => 'text'
+		)));
+		//page with more details
 		$wp_customize->add_setting( 'eternal_panel2', array(
 			'default'           => false,
 			'sanitize_callback' => 'eternal_sanitize_numeric_value',
 		) );
-
 		$wp_customize->add_control( 'eternal_panel2', array(
-			'label'   => esc_html__( 'Panel Content', 'eternal' ),
+			'label'   => esc_html__( 'Page with More Details', 'eternal' ),
 			'section' => 'eternal_panel2',
 			'type'    => 'dropdown-pages',
 		) );
-
-
-		// Panel 3
+		// RSVP Section
 		$wp_customize->add_section( 'eternal_panel3', array(
-			'title'           => esc_html__( 'Panel 3', 'eternal' ),
+			'title'           => esc_html__( 'RSVP', 'eternal' ),
 			'active_callback' => 'is_front_page',
 			'panel'           => 'eternal_theme_options',
 			'description'     => esc_html__( 'Add a background image to your panel by setting a featured image in the page editor. If you don&rsquo;t select a page, this panel will not be displayed.', 'eternal' ),
