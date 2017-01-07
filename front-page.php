@@ -17,9 +17,41 @@ get_header(); ?>
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main front-page" role="main">
 
-			<?php
-				//TODO ADD COUNTDOWN
-			 ?>
+			 <?php //wedding countdown section
+			 if ( get_theme_mod( 'eternal-wedding-date' ) ) :
+				 $dt_countdown_date = esc_attr( get_theme_mod( 'eternal-wedding-date' ) );
+				 $date = date( 'F d, Y', strtotime( $dt_countdown_date ));
+ 				?>
+				<div class='section-wrapper countdown-section-wrapper'>
+				<section class="countdown">
+				<?php if ( get_theme_mod( 'eternal-wedding-title' ) ) : ?>
+					<h2 class="countdown-title"><?php echo get_theme_mod( 'eternal-wedding-title' ); ?></h2>
+				<?php endif; ?>
+				<div>
+		      <div class="countdown-container">
+		        <div id="clockdiv">
+		          <div>
+		            <span class="days"></span>
+		            <div class="smalltext">Days</div>
+		          </div>
+		          <div>
+		            <span class="hours"></span>
+		            <div class="smalltext">Hours</div>
+		          </div>
+		          <div>
+		            <span class="minutes"></span>
+		            <div class="smalltext">Minutes</div>
+		          </div>
+		          <div>
+		            <span class="seconds"></span>
+		            <div class="smalltext">Seconds</div>
+		          </div>
+		        </div>
+		      </div>
+		    </div>
+			</section>
+		</div>
+			 <?php endif; ?>
 
 		<?php // Show the selected frontpage content
 
@@ -66,28 +98,6 @@ get_header(); ?>
 				$eternalcounter++;
 
 			endforeach; // foreach ( $panels as $panel )
-
-
-			/* In-page navigation */
-
-			echo '<ul class="panel-navigation">';
-			echo '<li><a class="panel0" href="#page"><span class="sep">&diams;</span><span class="hidden">' . esc_html__( 'Back to Top', 'eternal' ) . '</span></a></li>';
-
-			$counter = 0;
-
-			foreach ( $panels as $panel ) : //Iterate over each panel and grab titles from $titles[] defined in the previous loop
-
-				if ( get_theme_mod( 'eternal_panel' . $panel ) ) : //If the theme mod is set...
-
-					echo '<li><a class="panel' . $panel . '" href="#panel' . $panel . '"><span class="sep">&diams;</span><span class="hidden">' . $titles[$counter] . '</span></a></li>';
-
-					$counter++;
-
-				endif;
-
-			endforeach; // foreach ( $panels as $panel )
-
-			echo '</ul><!-- .panel-navigation -->';
 
 		endif; // if ( 0 !== eternal_panel_count() )
 

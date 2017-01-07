@@ -37,6 +37,7 @@ Nicolas Gallagher and Jonathan Neal http://necolas.github.io/normalize.css/
 	## Comments
 	## Header
 	## Footer
+	## Countdown
 # Infinite scroll
 # Media
 	## Captions
@@ -337,10 +338,6 @@ ins {
 big {
 	font-size: 125%;
 }
-.entry-title {
-	font-size: 2em;
-	color: #985051;
-}
 .entry-title a,
 .entry-title a:visited {
 	text-decoration: none;
@@ -348,6 +345,9 @@ big {
 }
 .entry-title a:hover {
 	text-decoration: underline;
+}
+.countdown-title {
+	text-align: center;
 }
 /*--------------------------------------------------------------
 # Elements
@@ -809,10 +809,12 @@ nav ul li a:hover {
 	display: inline;
 }
 
-.page-content,
-.entry-content,
-.entry-summary {
-	margin: 1.5em 0 0;
+@media screen and (min-width: 50em) {
+	.page-content,
+	.entry-content,
+	.entry-summary {
+		margin: 1.5em 0 0;
+	}
 }
 
 .page-links {
@@ -820,33 +822,59 @@ nav ul li a:hover {
 	margin: 0 0 1.5em;
 }
 
-main.front-page,
-main.site-main {
+section.countdown,
+article.page {
 	width: 80%;
 	max-width: 55em;
 	margin: auto;
 }
 @media screen and (max-width: 53em) {
-	main.front-page,
-	main.site-main {
+	section.countdown,
+	article.page {
 		box-sizing: border-box;
 		width: 100%;
 		padding: 0em 1.2em;
 	}
 }
-.entry-title {
-	font-size: 5em;
-	margin: .5em 0em 0em;
+.entry-title,
+.countdown-title {
+	font-size: 3em;
+	box-sizing: border-box;
+	margin: 0;
+	padding: .5em 0em .2em;
 }
 @media screen and (max-width: 37.5em) {
-	.entry-title {
-		font-size: 3.5em;
+	.entry-title,
+	.countdown-title {
+		font-size: 2.5em;
 	}
 }
 @media screen and (max-width: 28em) {
-	.entry-title {
-		font-size: 2.7em;
+	.entry-title,
+	.countdown-title {
+		font-size: 2em;
 	}
+}
+.custom-header-image {
+  background-size: 100% auto;
+  background-position: top left;
+  width: 100%;
+  height: 0;
+  margin: 0;
+  padding: 0;
+}
+.custom-header.in-panel {
+  position: relative;
+}
+.custom-header.in-panel {
+  background-color: transparent;
+}
+article .custom-header.in-panel {
+	background-color: #1e1c1b;
+	min-height: 200px;
+}
+.entry-title.front-page {
+	text-align: center;
 }
 /*--------------------------------------------------------------
 ## Comments
@@ -928,6 +956,101 @@ footer.site-footer p {
 	color: white;
 	text-decoration: none;
 }
+/*--------------------------------------------------------------
+## Countdown
+--------------------------------------------------------------*/
+.countdown-container {
+	padding-bottom: 3.5em;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+@media screen and (max-width: 34.3em) {
+	.countdown-container {
+		padding-bottom: 1.5em;
+	}
+}
+
+#clockdiv{
+	color: #fff;
+	display: inline-block;
+	font-weight: 100;
+	text-align: center;
+	font-size: 30px;
+}
+
+#clockdiv > div{
+	padding: 10px;
+	border-radius: 10%;
+	background: #985051;
+	display: inline-block;
+}
+
+#clockdiv div > span{
+	padding: 15px;
+  font-size: 1.5em;
+  line-height: .6;
+	display: inline-block;
+}
+
+.smalltext{
+	padding-top: 5px;
+	font-size: 1rem;
+}
+
+@media screen and (min-width: 46em) {
+  .site-name a {
+    font-size: 6rem;
+    color: #e8e9ea;
+  }
+  .wedding-date {
+    color: #e8e9ea;
+  }
+}
+@media screen and (min-width: 58em) {
+  .site-name a {
+    font-size: 7.5rem;
+    line-height: normal;
+  }
+}
+
+@media screen and (max-width: 37em) {
+  .site-name a {
+    font-size: 4.8rem;
+  }
+  .wedding-date {
+    font-size: 1.9rem;
+  }
+  .smalltext{
+    font-size: .8rem;
+  }
+  #clockdiv div > span{
+  	padding: 10px;
+    font-size: 1.2em;
+    line-height: .4;
+  }
+}
+
+@media screen and (max-width: 29em) {
+  .site-name a {
+    font-size: 3.2rem;
+  }
+  .wedding-date {
+    font-size: 1.5rem;
+  }
+  .smalltext{
+    font-size: .6rem;
+  }
+  #clockdiv div > span{
+    padding: .1em;
+    font-size: 1em;
+    line-height: .3;
+  }
+}
+.countdown-section-wrapper {
+	background: #f3d1c7;
+}
+
 /*--------------------------------------------------------------
 # Infinite scroll
 --------------------------------------------------------------*/

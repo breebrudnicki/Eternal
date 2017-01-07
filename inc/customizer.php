@@ -31,7 +31,6 @@ function eternal_customize_register( $wp_customize ) {
 		'settings' => 'eternal_custom-logo',
 	)));
 	//Wedding Date
-	$today = date("Y-m-d H:i:s");
 	$oneyear = date('Y-m-d', strtotime('+1 years'));
 	//date picker function - borrowed from together theme
 	class Eternal_DateControl extends WP_Customize_Control {
@@ -44,26 +43,40 @@ function eternal_customize_register( $wp_customize ) {
 		<?php
 		}
 	}
+	//Creating a section
+	$wp_customize->add_section('eternal_wedding-countdown', array(
+		'title' => __('Wedding Countdown', 'Eternal'),
+		'priority' => 30,
+	));
+	//wedding date setting
 	$wp_customize->add_setting('eternal-wedding-date', array(
 		'default' => $oneyear,
 		'sanitize_callback' => 'sanitize_text_field',
 		'transport' => 'refresh',
 	));
-	//Creating a section
-	$wp_customize->add_section('eternal_date', array(
-		'title' => __('Countdown Date Picker', 'Eternal'),
-		'priority' => 30,
-	));
 	//Creating a control
 	$wp_customize->add_control( new Eternal_DateControl($wp_customize, 'eternal-date-control', array(
 		'label' => __('Countdown Date Picker', 'Eternal'),
-		'section' => 'eternal_date',
+		'section' => 'eternal_wedding-countdown',
 		'settings' => 'eternal-wedding-date',
+		'type' => 'text'
+	)));
+	//setting for title
+	$wp_customize->add_setting('eternal-wedding-title', array(
+		'default' => "We've Picked a Date!",
+		'sanitize_callback' => 'sanitize_text_field',
+		'transport' => 'refresh',
+	));
+	//control for title
+	$wp_customize->add_control( new WP_Customize_Control($wp_customize, 'eternal-title-control', array(
+		'label' => __('Display Title', 'Eternal'),
+		'section' => 'eternal_wedding-countdown',
+		'settings' => 'eternal-wedding-title',
 		'type' => 'text'
 	)));
 
 		/**
-		 * Add the Theme Options section
+		 * Add Panels
 		 */
 		$wp_customize->add_panel( 'eternal_theme_options', array(
 			'title' => esc_html__( 'Front Page Options', 'eternal' ),
@@ -166,20 +179,18 @@ function eternal_customize_register( $wp_customize ) {
 			'section' => 'eternal_panel5',
 			'type'    => 'dropdown-pages',
 		) );
-
+		/**
+		 * Sanitize a numeric value
+		 */
+		function eternal_sanitize_numeric_value( $input ) {
+			if ( is_numeric( $input ) ) {
+				return intval( $input );
+			} else {
+				return 0;
+			}
+		}
 }
 add_action( 'customize_register', 'eternal_customize_register' );
-
-/**
- * Sanitize a numeric value
- */
-function eternal_sanitize_numeric_value( $input ) {
-	if ( is_numeric( $input ) ) {
-		return intval( $input );
-	} else {
-		return 0;
-	}
-}
 
 /**
  * Binds JS handlers to make Theme Customizer preview reload changes asynchronously.
@@ -188,3 +199,20 @@ function eternal_customize_preview_js() {
 	wp_enqueue_script( 'eternal_customizer', get_template_directory_uri() . '/js/customizer.js', array( 'customize-preview' ), '20151215', true );
 }
 add_action( 'customize_preview_init', 'eternal_customize_preview_js' );
+
+/**
+ * Count Down Date
+ */
+// Register the script
+function eternal_load_scripts() {
+	wp_register_script('eternal_countdown', get_template_directory_uri() . '/js/countdown.js', false, false, true);
+
+	$eternal_countdown_date = array(
+		'eternal_countdown_date' => get_theme_mod( 'eternal-wedding-date' )
+	);
+	wp_localize_script( 'eternal_countdown', 'eternal_countdown_date', $eternal_countdown_date );
+	// Enqueued script with localized data.
+	wp_enqueue_script( 'eternal_countdown' );
+
+}
+add_action('wp_enqueue_scripts', 'eternal_load_scripts');

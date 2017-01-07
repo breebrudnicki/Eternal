@@ -126,6 +126,16 @@ function eternal_scripts() {
 }
 add_action( 'wp_enqueue_scripts', 'eternal_scripts' );
 
+/*
+*
+* ENQUE COUNTDOWN JS
+*/
+function enqueue_countdown() {
+  //wp_register_script('eternal_countdown', get_template_directory_uri() . '/js/countdown.js', false, false, true);
+  wp_enqueue_script('eternal_countdown', get_template_directory_uri() . '/js/countdown.js', false, false, true);
+}
+add_action( 'wp_enqueue_scripts', 'enqueue_countdown' );
+
 /**
  * Implement the Custom Header feature.
  */

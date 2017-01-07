@@ -10,14 +10,7 @@
 global $eternalcounter;
 
 ?>
-
-<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-
-	<span class="panel eternal-panel<?php echo esc_attr( $eternalcounter ); ?>" id="panel<?php echo esc_attr( $eternalcounter ); ?>">
-		<span class="eternal-panel-title"><?php printf( esc_html__( 'Panel %1$s', 'eternal' ), $eternalcounter ); ?></span>
-	</span>
-
-	<div class="custom-header in-panel">
+<div class="article-wrapper panel-wrapper">
 
 		<?php if ( has_post_thumbnail() ) :
 
@@ -27,17 +20,18 @@ global $eternalcounter;
 
 			//Calculate aspect ratio: h / w * 100%
 			$ratio = $thumbnail_attributes[2] / $thumbnail_attributes[1] * 100; ?>
-
-			<div class="custom-header-image" style="padding-top: <?php echo esc_attr( $ratio ); ?>%; background-image: url(<?php echo esc_url( $thumbnail_attributes[0] ); ?>);">
+			<div class="custom-header in-panel">
+				<div class="custom-header-image" style="padding-top: <?php echo esc_attr( $ratio ); ?>%; background-image: url(<?php echo esc_url( $thumbnail_attributes[0] ); ?>);">
+				</div>
 			</div>
-
 		<?php endif; ?>
 
+<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+
 		<header class="entry-header">
-			<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
+			<?php the_title( '<h1 class="entry-title front-page">', '</h1>' ); ?>
 		</header><!-- .entry-header -->
 
-	</div>
 
 	<?php if ( '' !== get_the_content() ) : ?>
 		<div class="entry-content">
@@ -64,3 +58,4 @@ global $eternalcounter;
 		);
 	?>
 </article><!-- #post-## -->
+</div>
