@@ -17,36 +17,81 @@ get_header(); ?>
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main front-page" role="main">
 
-		<?php
-		if ( have_posts() ) :
-
-			if ( is_home() && ! is_front_page() ) : ?>
-				<header>
-					<h1 class="page-title screen-reader-text"><?php single_post_title(); ?></h1>
-				</header>
-
 			<?php
-			endif;
+				//TODO ADD COUNTDOWN
+			 ?>
 
-			/* Start the Loop */
+		<?php // Show the selected frontpage content
+
+		if ( have_posts() ) :
 			while ( have_posts() ) : the_post();
-
-				/*
-				 * Include the Post-Format-specific template for the content.
-				 * If you want to override this in a child theme, then include a file
-				 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
-				 */
-				get_template_part( 'template-parts/content', get_post_format() );
-
+				get_template_part( 'template-parts/content', 'page' );
 			endwhile;
-
-			the_posts_navigation();
-
-		else :
-
+		else : // I'm not sure it's possible to have no posts when this page is shown, but WTH
 			get_template_part( 'template-parts/content', 'none' );
+		endif;
 
-		endif; ?>
+		?>
+
+		<?php
+
+		// Get each of our panels and show the post data
+		$panels = array( '1', '2', '3', '4', '5' );
+		$titles = array();
+
+		global $eternalcounter; //Used in content-frontpage.php
+
+		if ( 0 !== eternal_panel_count() ) : //If we have pages to show...
+
+			$eternalcounter = 1;
+
+			foreach ( $panels as $panel ) :
+
+				if ( get_theme_mod( 'eternal_panel' . $panel ) ) :
+
+					$post = get_post( get_theme_mod( 'eternal_panel' . $panel ) );
+
+					setup_postdata( $post );
+
+					set_query_var( 'eternal_panel', $panel );
+
+					get_template_part( 'template-parts/content', 'frontpage' );
+
+					$titles[] = get_the_title(); //Put page titles in an array for use in navigation
+
+					wp_reset_postdata();
+
+				endif; // if ( get_theme_mod( 'eternal_panel' . $panel ) )
+
+				$eternalcounter++;
+
+			endforeach; // foreach ( $panels as $panel )
+
+
+			/* In-page navigation */
+
+			echo '<ul class="panel-navigation">';
+			echo '<li><a class="panel0" href="#page"><span class="sep">&diams;</span><span class="hidden">' . esc_html__( 'Back to Top', 'eternal' ) . '</span></a></li>';
+
+			$counter = 0;
+
+			foreach ( $panels as $panel ) : //Iterate over each panel and grab titles from $titles[] defined in the previous loop
+
+				if ( get_theme_mod( 'eternal_panel' . $panel ) ) : //If the theme mod is set...
+
+					echo '<li><a class="panel' . $panel . '" href="#panel' . $panel . '"><span class="sep">&diams;</span><span class="hidden">' . $titles[$counter] . '</span></a></li>';
+
+					$counter++;
+
+				endif;
+
+			endforeach; // foreach ( $panels as $panel )
+
+			echo '</ul><!-- .panel-navigation -->';
+
+		endif; // if ( 0 !== eternal_panel_count() )
+
+		?>
 
 		</main><!-- #main -->
 	</div><!-- #primary -->

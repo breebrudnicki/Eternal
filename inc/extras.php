@@ -37,3 +37,18 @@ function eternal_pingback_header() {
 	}
 }
 add_action( 'wp_head', 'eternal_pingback_header' );
+
+/*
+ * Count our number of active panels
+ * Primarily used to see if we have any panels active, duh.
+ */
+function eternal_panel_count() {
+	$panels = array( '1', '2', '3', '4', '5' );
+	$panel_count = 0;
+	foreach ( $panels as $panel ) :
+		if ( get_theme_mod( 'eternal_panel' . $panel ) ) :
+			$panel_count++;
+		endif;
+	endforeach;
+	return $panel_count;
+}

@@ -35,15 +35,15 @@ function eternal_customize_register( $wp_customize ) {
 	$oneyear = date('Y-m-d', strtotime('+1 years'));
 	//date picker function - borrowed from together theme
 	class Eternal_DateControl extends WP_Customize_Control {
-	function render_content() {
+		function render_content() {
 		?>
 		<label>
 			<span><?php echo esc_html($this->label); ?></span>
 			<input type="date" <?php $this->link(); ?> value="<?php echo esc_attr($this->value()); ?>">
 		</label>
 		<?php
+		}
 	}
-}
 	$wp_customize->add_setting('eternal-wedding-date', array(
 		'default' => $oneyear,
 		'sanitize_callback' => 'sanitize_text_field',
@@ -61,8 +61,125 @@ function eternal_customize_register( $wp_customize ) {
 		'settings' => 'eternal-wedding-date',
 		'type' => 'text'
 	)));
+
+		/**
+		 * Add the Theme Options section
+		 */
+		$wp_customize->add_panel( 'eternal_theme_options', array(
+			'title' => esc_html__( 'Front Page Options', 'eternal' ),
+		) );
+
+		// Panel 1
+		$wp_customize->add_section( 'eternal_panel1', array(
+			'title'           => esc_html__( 'Panel 1', 'eternal' ),
+			'active_callback' => 'is_front_page',
+			'panel'           => 'eternal_theme_options',
+			'description'     => esc_html__( 'Add a background image to your panel by setting a featured image in the page editor. If you don&rsquo;t select a page, this panel will not be displayed.', 'eternal' ),
+		) );
+
+		$wp_customize->add_setting( 'eternal_panel1', array(
+			'default'           => false,
+			'sanitize_callback' => 'eternal_sanitize_numeric_value',
+		) );
+
+		$wp_customize->add_control( 'eternal_panel1', array(
+			'label'   => esc_html__( 'Panel Content', 'eternal' ),
+			'section' => 'eternal_panel1',
+			'type'    => 'dropdown-pages',
+		) );
+
+		// Panel 2
+		$wp_customize->add_section( 'eternal_panel2', array(
+			'title'           => esc_html__( 'Panel 2', 'eternal' ),
+			'active_callback' => 'is_front_page',
+			'panel'           => 'eternal_theme_options',
+			'description'     => esc_html__( 'Add a background image to your panel by setting a featured image in the page editor. If you don&rsquo;t select a page, this panel will not be displayed.', 'eternal' ),
+		) );
+
+		$wp_customize->add_setting( 'eternal_panel2', array(
+			'default'           => false,
+			'sanitize_callback' => 'eternal_sanitize_numeric_value',
+		) );
+
+		$wp_customize->add_control( 'eternal_panel2', array(
+			'label'   => esc_html__( 'Panel Content', 'eternal' ),
+			'section' => 'eternal_panel2',
+			'type'    => 'dropdown-pages',
+		) );
+
+
+		// Panel 3
+		$wp_customize->add_section( 'eternal_panel3', array(
+			'title'           => esc_html__( 'Panel 3', 'eternal' ),
+			'active_callback' => 'is_front_page',
+			'panel'           => 'eternal_theme_options',
+			'description'     => esc_html__( 'Add a background image to your panel by setting a featured image in the page editor. If you don&rsquo;t select a page, this panel will not be displayed.', 'eternal' ),
+		) );
+
+		$wp_customize->add_setting( 'eternal_panel3', array(
+			'default'           => false,
+			'sanitize_callback' => 'eternal_sanitize_numeric_value',
+		) );
+
+		$wp_customize->add_control( 'eternal_panel3', array(
+			'label'   => esc_html__( 'Panel Content', 'eternal' ),
+			'section' => 'eternal_panel3',
+			'type'    => 'dropdown-pages',
+		) );
+
+
+		// Panel 4
+		$wp_customize->add_section( 'eternal_panel4', array(
+			'title'           => esc_html__( 'Panel 4', 'eternal' ),
+			'active_callback' => 'is_front_page',
+			'panel'           => 'eternal_theme_options',
+			'description'     => esc_html__( 'Add a background image to your panel by setting a featured image in the page editor. If you don&rsquo;t select a page, this panel will not be displayed.', 'eternal' ),
+		) );
+
+		$wp_customize->add_setting( 'eternal_panel4', array(
+			'default'           => false,
+			'sanitize_callback' => 'eternal_sanitize_numeric_value',
+		) );
+
+		$wp_customize->add_control( 'eternal_panel4', array(
+			'label'   => esc_html__( 'Panel Content', 'eternal' ),
+			'section' => 'eternal_panel4',
+			'type'    => 'dropdown-pages',
+		) );
+
+
+		// Panel 5
+		$wp_customize->add_section( 'eternal_panel5', array(
+			'title'           => esc_html__( 'Panel 5', 'eternal' ),
+			'active_callback' => 'is_front_page',
+			'panel'           => 'eternal_theme_options',
+			'description'     => esc_html__( 'Add a background image to your panel by setting a featured image in the page editor. If you don&rsquo;t select a page, this panel will not be displayed.', 'eternal' ),
+		) );
+
+		$wp_customize->add_setting( 'eternal_panel5', array(
+			'default'           => false,
+			'sanitize_callback' => 'eternal_sanitize_numeric_value',
+		) );
+
+		$wp_customize->add_control( 'eternal_panel5', array(
+			'label'   => esc_html__( 'Panel Content', 'eternal' ),
+			'section' => 'eternal_panel5',
+			'type'    => 'dropdown-pages',
+		) );
+
 }
 add_action( 'customize_register', 'eternal_customize_register' );
+
+/**
+ * Sanitize a numeric value
+ */
+function eternal_sanitize_numeric_value( $input ) {
+	if ( is_numeric( $input ) ) {
+		return intval( $input );
+	} else {
+		return 0;
+	}
+}
 
 /**
  * Binds JS handlers to make Theme Customizer preview reload changes asynchronously.
