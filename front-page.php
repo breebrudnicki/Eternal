@@ -103,8 +103,9 @@ get_header(); ?>
 	 </div>
 		<?php endif; ?>
 
-		<?php
 
+
+		<?php
 		// Get each of our panels and show the post data
 		$panels = array( '1', '2', '3', '4', '5' );
 		$titles = array();
@@ -140,6 +141,28 @@ get_header(); ?>
 		endif; // if ( 0 !== eternal_panel_count() )
 
 		?>
+		<?php //Gallery
+		if ( get_theme_mod( 'eternal_panel5' ) ) : ?>
+		<div class="section-wrapper gallery-section-wrapper">
+		 <section class="gallery full-width">
+			 	<?php
+
+				$post = get_post( get_theme_mod( 'eternal_panel' . $panel ) );
+
+				setup_postdata( $post );
+
+				set_query_var( 'eternal_panel', $panel );
+
+				get_template_part( 'template-parts/content', 'frontpage' );
+
+				$titles[] = get_the_title(); //Put page titles in an array for use in navigation
+
+				wp_reset_postdata();
+
+				 ?>
+		 </section>
+	 	</div>
+		<?php endif; ?>
 
 		</main><!-- #main -->
 	</div><!-- #primary -->

@@ -218,6 +218,16 @@ function eternal_customize_register( $wp_customize ) {
 			'settings' => 'event-date-one',
 			'type' => 'text'
 		)));
+		//page with more details
+		$wp_customize->add_setting( 'eternal_panel2', array(
+			'default'           => false,
+			'sanitize_callback' => 'eternal_sanitize_numeric_value',
+		) );
+		$wp_customize->add_control( 'eternal_panel2', array(
+			'label'   => esc_html__( 'Page with More Details', 'eternal' ),
+			'section' => 'eternal_panel2',
+			'type'    => 'dropdown-pages',
+		) );
 		//Event Two
 		//place
 		$wp_customize->add_setting('venue-two', array(
@@ -245,13 +255,14 @@ function eternal_customize_register( $wp_customize ) {
 			'type' => 'text'
 		)));
 		//page with more details
-		$wp_customize->add_setting( 'eternal_panel2', array(
+		$wp_customize->add_setting( 'eternal_panel2-2', array(
 			'default'           => false,
 			'sanitize_callback' => 'eternal_sanitize_numeric_value',
 		) );
 		$wp_customize->add_control( 'eternal_panel2', array(
 			'label'   => esc_html__( 'Page with More Details', 'eternal' ),
 			'section' => 'eternal_panel2',
+			'settings' => 'eternal_panel2',
 			'type'    => 'dropdown-pages',
 		) );
 		// RSVP Section
@@ -294,9 +305,9 @@ function eternal_customize_register( $wp_customize ) {
 		) );
 
 
-		// Panel 5
+		// Panel 5 - Gallery
 		$wp_customize->add_section( 'eternal_panel5', array(
-			'title'           => esc_html__( 'Panel 5', 'eternal' ),
+			'title'           => esc_html__( 'Gallery Page', 'eternal' ),
 			'active_callback' => 'is_front_page',
 			'panel'           => 'eternal_theme_options',
 			'description'     => esc_html__( 'Add a background image to your panel by setting a featured image in the page editor. If you don&rsquo;t select a page, this panel will not be displayed.', 'eternal' ),
