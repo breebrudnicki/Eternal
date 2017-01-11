@@ -52,7 +52,7 @@ get_header(); ?>
 			</section>
 		</div>
 			 <?php endif; ?>
-
+		<section class="full-width">
 		<?php // Show the selected frontpage content
 
 		if ( have_posts() ) :
@@ -64,7 +64,7 @@ get_header(); ?>
 		endif;
 
 		?>
-
+	</section>
 		<?php
 		//Registry
 		if ( get_theme_mod( 'eternal-registry-title' ) ) : ?>
@@ -103,11 +103,9 @@ get_header(); ?>
 	 </div>
 		<?php endif; ?>
 
-
-
 		<?php
 		// Get each of our panels and show the post data
-		$panels = array( '1', '2', '3', '4', '5' );
+		$panels = array( '1', '2', '3' );
 		$titles = array();
 
 		global $eternalcounter; //Used in content-frontpage.php
@@ -142,12 +140,12 @@ get_header(); ?>
 
 		?>
 		<?php //Gallery
-		if ( get_theme_mod( 'eternal_panel5' ) ) : ?>
+		if ( get_theme_mod( 'eternal_gallery_full' ) ) : ?>
 		<div class="section-wrapper gallery-section-wrapper">
 		 <section class="gallery full-width">
 			 	<?php
 
-				$post = get_post( get_theme_mod( 'eternal_panel' . $panel ) );
+				$post = get_post( get_theme_mod( 'eternal_gallery_full' ) );
 
 				setup_postdata( $post );
 

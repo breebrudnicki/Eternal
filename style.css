@@ -836,12 +836,12 @@ nav ul li a:hover {
 }
 
 section.countdown,
-article.page {
+article.page:not(:target) {
 	width: 80%;
 	max-width: 55em;
 	margin: auto;
 }
-section.gallery.full-width article.page {
+section.full-width article.page {
 	width: 100%;
 	max-width: none;
 	margin: 0;
@@ -1206,4 +1206,50 @@ object {
 div.tiled-gallery div.gallery-row {
 	margin: auto;
 	width: 100%;
+}
+
+/**Specific to me**/
+.timeline-container,
+div.event-info-container,
+.registry-items {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+.event-info-container {
+	border: 8px double #985051;
+}
+.registry-items {
+	padding: 1em;
+}
+.registry-items img {
+	padding: 1em;
+}
+.col-1 {
+	padding: 0em 3em;
+	align-items: flex-start;
+	width: 310px;
+}
+.col-1 h1 {
+	color: #985051;
+}
+.timeline-container {
+	background: url(flower-background.jpg);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 100%;
+}
+@media screen and (max-width: 658px) {
+	.timeline-container {
+		background: url(flower-background-long.jpg);
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: auto 100%;
+	}
+}
+article#post-12 {
+	background: url(pink-watercolor.jpg);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 100%;
 }
